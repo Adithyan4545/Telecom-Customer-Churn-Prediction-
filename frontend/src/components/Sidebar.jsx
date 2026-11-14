@@ -6,8 +6,10 @@ import {
   Users,
   History,
   BarChart3,
-  Radio
+  Radio,
+  LogOut
 } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 const navItems = [
   { name: 'Dashboard', path: '/dashboard', icon: LayoutDashboard },
@@ -18,6 +20,8 @@ const navItems = [
 ];
 
 export const Sidebar = () => {
+  const { user, logout } = useAuth();
+
   return (
     <aside className="w-64 bg-slate-900 text-slate-300 flex flex-col shrink-0 min-h-screen border-r border-slate-800">
       {/* Brand Header */}
@@ -57,9 +61,23 @@ export const Sidebar = () => {
         })}
       </nav>
 
-      {/* Clean System Footer */}
-      <div className="p-4 border-t border-slate-800/80 bg-slate-950/40 text-xs text-slate-500 text-center">
-        Telecom Churn Prediction System
+      {/* User Info & Logout Button */}
+      <div className="p-3.5 border-t border-slate-800/80 bg-slate-950/50 flex items-center justify-between gap-2">
+        <div className="min-w-0 flex-1 pl-1">
+          <p className="text-xs font-semibold text-slate-200 truncate">
+            {user?.name || 'Administrator'}
+          </p>
+          <p className="text-[11px] text-slate-400 truncate">
+            {user?.email || 'admin@telecom.com'}
+          </p>
+        </div>
+        <button
+          onClick={logout}
+          title="Sign Out"
+          className="p-2 rounded-xl text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 transition-colors cursor-pointer shrink-0"
+        >
+          <LogOut className="w-4 h-4" />
+        </button>
       </div>
     </aside>
   );
