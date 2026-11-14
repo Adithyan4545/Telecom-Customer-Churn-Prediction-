@@ -1,0 +1,58 @@
+{
+    "model_name": "Random Forest (Tuned)",
+    "strategy": "Hyperparameter_Tuned",
+    "train_samples": 5634,
+    "test_samples": 1409,
+    "train_churn_rate": 0.2653532126375577,
+    "test_churn_rate": 0.2654364797728886,
+    "best_hyperparameters": {
+        "classifier__n_estimators": "100",
+        "classifier__min_samples_split": "10",
+        "classifier__min_samples_leaf": "2",
+        "classifier__max_depth": "10",
+        "classifier__class_weight": "balanced_subsample"
+    },
+    "test_performance_metrics": {
+        "Accuracy": 0.7743080198722498,
+        "Balanced_Accuracy": 0.7678266036322303,
+        "Precision": 0.5551181102362205,
+        "Recall": 0.7540106951871658,
+        "F1_Score": 0.6394557823129252,
+        "ROC_AUC": 0.8435234699940584,
+        "PR_AUC": 0.6513982656455338,
+        "Composite_Balance_Score": 0.7139234013693725
+    },
+    "top_10_features": [
+        {
+            "Feature": "ContractPeriod_Months"
+        },
+        {
+            "Feature": "tenure"
+        },
+        {
+            "Feature": "TotalCharges"
+        },
+        {
+            "Feature": "MonthlyCharges"
+        },
+        {
+            "Feature": "AverageMonthlySpend"
+        },
+        {
+            "Feature": "Contract_Two year"
+        },
+        {
+            "Feature": "InternetService_Fiber optic"
+        },
+        {
+            "Feature": "TenureGroup_New"
+        },
+        {
+            "Feature": "MonthlyChargeDiff"
+        },
+        {
+            "Feature": "PaymentMethod_Electronic check"
+        }
+    ],
+    "training_timestamp": "2026-11-14T16:56:07Z"
+}

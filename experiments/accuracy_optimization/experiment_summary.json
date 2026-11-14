@@ -1,0 +1,118 @@
+{
+    "experiment_name": "Accuracy Optimization and Advanced Benchmarking",
+    "validation_strategy": "Nested Stratified 5-Fold Cross-Validation",
+    "total_samples": 7043,
+    "churn_rate": 0.2653698707936959,
+    "optuna_best_hyperparameters": {
+        "CatBoost": {
+            "iterations": 200,
+            "depth": 4,
+            "learning_rate": 0.0509246792671968,
+            "l2_leaf_reg": 7.122035531501282,
+            "random_seed": 42,
+            "verbose": 0
+        },
+        "LightGBM": {
+            "n_estimators": 100,
+            "max_depth": 3,
+            "num_leaves": 27,
+            "learning_rate": 0.08543922344602914,
+            "min_child_samples": 50,
+            "subsample": 0.7932891250228298,
+            "reg_alpha": 0.04454804181576418,
+            "reg_lambda": 0.10728310515522599,
+            "random_state": 42,
+            "verbose": -1
+        },
+        "XGBoost": {
+            "n_estimators": 100,
+            "max_depth": 3,
+            "learning_rate": 0.07147549155589619,
+            "subsample": 0.7125504850228206,
+            "colsample_bytree": 0.7845989334896094,
+            "reg_alpha": 4.121073924953272,
+            "reg_lambda": 0.13346570134598856,
+            "eval_metric": "logloss",
+            "random_state": 42
+        }
+    },
+    "champion_models": {
+        "best_for_accuracy": {
+            "model": "Stacking Classifier (Acc-Optimized @ 0.48)",
+            "accuracy": 0.8059065739031662,
+            "precision": 0.6686827956989247,
+            "recall": 0.5323702514713751,
+            "f1_score": 0.592791182603515,
+            "roc_auc": 0.8485234440714087
+        },
+        "best_for_f1": {
+            "model": "Stacking Classifier (Balanced @ 0.22)",
+            "accuracy": 0.757347721141559,
+            "precision": 0.5286123032904149,
+            "recall": 0.7907972177635099,
+            "f1_score": 0.6336548767416934,
+            "roc_auc": 0.8485234440714087
+        },
+        "best_for_recall": {
+            "model": "Stacking Classifier (Balanced @ 0.22)",
+            "accuracy": 0.757347721141559,
+            "precision": 0.5286123032904149,
+            "recall": 0.7907972177635099,
+            "f1_score": 0.6336548767416934,
+            "roc_auc": 0.8485234440714087
+        },
+        "best_overall_balanced": {
+            "model": "Stacking Classifier (Balanced @ 0.22)",
+            "accuracy": 0.757347721141559,
+            "precision": 0.5286123032904149,
+            "recall": 0.7907972177635099,
+            "f1_score": 0.6336548767416934,
+            "roc_auc": 0.8485234440714087,
+            "pr_auc": 0.6645965181267828,
+            "composite_balance_score": 0.7203046361471679
+        }
+    },
+    "top_10_features": [
+        {
+            "Feature": "tenure",
+            "Permutation_Importance": 0.06181056535920739
+        },
+        {
+            "Feature": "Contract_Two year",
+            "Permutation_Importance": 0.020570554546614626
+        },
+        {
+            "Feature": "TotalCharges",
+            "Permutation_Importance": 0.01272018403744446
+        },
+        {
+            "Feature": "MonthlyCharges",
+            "Permutation_Importance": 0.008473924960853885
+        },
+        {
+            "Feature": "Contract_One year",
+            "Permutation_Importance": 0.00790147593546604
+        },
+        {
+            "Feature": "InternetService_Fiber optic",
+            "Permutation_Importance": 0.006937546108118009
+        },
+        {
+            "Feature": "FiberWithoutTechSupport",
+            "Permutation_Importance": 0.006341333369733726
+        },
+        {
+            "Feature": "StreamingCount",
+            "Permutation_Importance": 0.005128670475065267
+        },
+        {
+            "Feature": "MonthlyChargeDiff",
+            "Permutation_Importance": 0.004984082035067239
+        },
+        {
+            "Feature": "PaymentMethod_Electronic check",
+            "Permutation_Importance": 0.004371127150755582
+        }
+    ],
+    "timestamp": "2026-11-14T17:24:42Z"
+}
