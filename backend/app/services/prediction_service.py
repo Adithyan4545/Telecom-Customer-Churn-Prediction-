@@ -3,6 +3,7 @@
 import csv
 import io
 import logging
+import re
 import sys
 import uuid
 from datetime import datetime, timezone
@@ -194,6 +195,24 @@ class PredictionService:
         }
         res = await db.predictions.insert_one(doc)
         return str(res.inserted_id)
+
+    async def get_next_customer_id(self) -> str:
+        """Finds the most recent sequential CUST-XXXXX customer_id and returns the next ID."""
+        db = get_database()
+        latest_num = 10492
+        try:
+            cursor = db.predictions.find(
+                {"customer_id": {"$regex": r"^CUST-\d+$", "$options": "i"}}
+            ).sort("created_at", -1).limit(10)
+            async for doc in cursor:
+                cid = str(doc.get("customer_id", ""))
+                match = re.search(r"CUST-(\d+)", cid, re.IGNORECASE)
+                if match:
+                    latest_num = int(match.group(1))
+                    break
+        except Exception as e:
+            logger.warning("Error computing next customer_id: %s", e)
+        return f"CUST-{latest_num + 1}"
 
     async def get_prediction_history(
         self,

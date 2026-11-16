@@ -70,6 +70,13 @@ async def export_predictions_csv():
     )
 
 
+@router.get("/predictions/next-id")
+async def get_next_customer_id():
+    """Generates the next sequential customer ID."""
+    next_id = await prediction_service.get_next_customer_id()
+    return {"next_customer_id": next_id}
+
+
 @router.get("/predictions/{prediction_id}")
 async def get_prediction_record(prediction_id: str):
     """Retrieves an individual prediction record by ID."""

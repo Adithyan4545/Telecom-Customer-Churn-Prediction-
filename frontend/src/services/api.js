@@ -47,6 +47,7 @@ export const predictionApi = {
   predict: (data) => api.post('/predict', data),
   save: (data) => api.post('/predictions', data),
   listHistory: (params) => api.get('/predictions', { params }),
+  getNextId: () => api.get('/predictions/next-id'),
   getById: (id) => api.get(`/predictions/${id}`),
   delete: (id) => api.delete(`/predictions/${id}`),
   exportCSV: () => api.get('/predictions/export/csv', { responseType: 'blob' }),

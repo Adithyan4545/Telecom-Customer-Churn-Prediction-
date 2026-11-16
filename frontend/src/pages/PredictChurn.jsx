@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Sparkles,
   Save,
@@ -9,10 +9,29 @@ import {
   CreditCard,
   Wifi,
   Shield,
-  Info
+  Info,
+  Plus,
+  ArrowRight
 } from 'lucide-react';
 import { predictionApi } from '../services/api';
 import { ProbabilityMeter } from '../components/ProbabilityMeter';
+
+const incrementCustomerId = (currentId) => {
+  if (!currentId) return 'CUST-10493';
+  const match = currentId.match(/(CUST-?)(\d+)/i);
+  if (match) {
+    const prefix = match[1];
+    const num = parseInt(match[2], 10) + 1;
+    const padLength = match[2].length;
+    return `${prefix}${String(num).padStart(padLength, '0')}`;
+  }
+  const anyDigits = currentId.match(/(\d+)/);
+  if (anyDigits) {
+    const num = parseInt(anyDigits[1], 10) + 1;
+    return currentId.replace(anyDigits[1], String(num).padStart(anyDigits[1].length, '0'));
+  }
+  return `${currentId}-1`;
+};
 
 const initialFormData = {
   gender: 'Female',
@@ -38,12 +57,34 @@ const initialFormData = {
 
 export const PredictChurn = () => {
   const [formData, setFormData] = useState(initialFormData);
-  const [customerId, setCustomerId] = useState('CUST-10492');
+  const [customerId, setCustomerId] = useState(() => {
+    return localStorage.getItem('telecom_current_cust_id') || 'CUST-10493';
+  });
   const [loading, setLoading] = useState(false);
   const [prediction, setPrediction] = useState(null);
   const [savedSuccess, setSavedSuccess] = useState(false);
   const [saveLoading, setSaveLoading] = useState(false);
   const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchNextId = async () => {
+      try {
+        const res = await predictionApi.getNextId();
+        if (res.data?.next_customer_id) {
+          const next = res.data.next_customer_id;
+          const currentLocal = localStorage.getItem('telecom_current_cust_id');
+          // If local is not set or smaller than server next ID, use server's next ID
+          if (!currentLocal || currentLocal === 'CUST-10492') {
+            setCustomerId(next);
+            localStorage.setItem('telecom_current_cust_id', next);
+          }
+        }
+      } catch (e) {
+        console.warn('Could not fetch next customer ID from server, using local sequence', e);
+      }
+    };
+    fetchNextId();
+  }, []);
 
   const handleChange = (field, value) => {
     setFormData((prev) => {
@@ -64,7 +105,9 @@ export const PredictChurn = () => {
 
   const handleReset = () => {
     setFormData(initialFormData);
-    setCustomerId(`CUST-${Math.floor(10000 + Math.random() * 90000)}`);
+    const nextId = incrementCustomerId(customerId);
+    setCustomerId(nextId);
+    localStorage.setItem('telecom_current_cust_id', nextId);
     setPrediction(null);
     setSavedSuccess(false);
     setError('');
@@ -112,6 +155,10 @@ export const PredictChurn = () => {
         threshold: prediction.threshold,
       });
       setSavedSuccess(true);
+      // Auto-increment customerId for the next customer
+      const nextId = incrementCustomerId(prediction.customer_id || customerId);
+      setCustomerId(nextId);
+      localStorage.setItem('telecom_current_cust_id', nextId);
     } catch (err) {
       setError('Failed to save prediction record.');
     } finally {
@@ -163,14 +210,37 @@ export const PredictChurn = () => {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="block text-xs font-semibold text-slate-600 mb-1">Customer Identifier</label>
-                <input
-                  type="text"
-                  value={customerId}
-                  onChange={(e) => setCustomerId(e.target.value)}
-                  placeholder="e.g. CUST-10492"
-                  className="w-full px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500"
-                />
+                <div className="flex items-center justify-between mb-1">
+                  <label className="block text-xs font-semibold text-slate-600">Customer Identifier</label>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const next = incrementCustomerId(customerId);
+                      setCustomerId(next);
+                      localStorage.setItem('telecom_current_cust_id', next);
+                    }}
+                    title="Advance to next customer ID (+1)"
+                    className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-600 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 px-2 py-0.5 rounded cursor-pointer transition-colors"
+                  >
+                    <Plus className="w-3 h-3" />
+                    <span>Next ID</span>
+                  </button>
+                </div>
+                <div className="relative">
+                  <input
+                    type="text"
+                    value={customerId}
+                    onChange={(e) => {
+                      setCustomerId(e.target.value);
+                      localStorage.setItem('telecom_current_cust_id', e.target.value);
+                    }}
+                    placeholder="e.g. CUST-10493"
+                    className="w-full pl-3 pr-28 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs font-semibold text-slate-800 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 font-mono"
+                  />
+                  <span className="absolute right-2 top-1/2 -translate-y-1/2 text-[10px] font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 pointer-events-none">
+                    Auto-Increment
+                  </span>
+                </div>
               </div>
 
               <div>
@@ -521,9 +591,22 @@ export const PredictChurn = () => {
               {/* Save Prediction Button */}
               <div>
                 {savedSuccess ? (
-                  <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-xs flex items-center justify-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-600" />
-                    <span>Saved to Prediction History</span>
+                  <div className="space-y-2">
+                    <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-700 font-bold text-xs flex items-center justify-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                      <span>Saved to Prediction History</span>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setPrediction(null);
+                        setSavedSuccess(false);
+                      }}
+                      className="w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-xs shadow-xs flex items-center justify-center gap-2 cursor-pointer transition-colors"
+                    >
+                      <span>Evaluate Next Customer ({customerId})</span>
+                      <ArrowRight className="w-3.5 h-3.5" />
+                    </button>
                   </div>
                 ) : (
                   <button
