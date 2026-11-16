@@ -92,25 +92,25 @@ export const Dashboard = () => {
       {/* Page Title & Action Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h2 className="text-2xl font-black text-slate-900 tracking-tight">Executive Telecommunications Overview</h2>
-          <p className="text-xs text-slate-500 mt-1">
-            Real-time subscriber churn statistics and model inference telemetry
+          <h2 className="text-2xl md:text-3xl font-black text-slate-900 tracking-tight">Executive Telecommunications Overview</h2>
+          <p className="text-sm text-slate-500 mt-1 font-medium">
+            Real-time subscriber churn statistics and machine learning inference telemetry
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchData}
-            className="px-3.5 py-2 rounded-xl bg-white border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-50 shadow-xs flex items-center gap-2 cursor-pointer transition-colors"
+            className="px-4 py-2.5 rounded-xl bg-white border border-slate-300 text-sm font-semibold text-slate-700 hover:bg-slate-50 shadow-xs flex items-center gap-2 cursor-pointer transition-colors"
           >
-            <RefreshCw className="w-3.5 h-3.5" />
-            <span>Refresh</span>
+            <RefreshCw className="w-4 h-4 text-slate-500" />
+            <span>Refresh Data</span>
           </button>
           <Link
             to="/predict"
-            className="px-4 py-2 rounded-xl bg-blue-600 hover:bg-blue-500 text-white text-xs font-bold shadow-md shadow-blue-500/20 flex items-center gap-2 transition-all cursor-pointer"
+            className="px-5 py-2.5 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white text-sm font-bold shadow-md shadow-indigo-600/20 flex items-center gap-2 transition-all cursor-pointer"
           >
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Run New Prediction</span>
+            <Sparkles className="w-4 h-4" />
+            <span>Predict Customer Churn</span>
           </Link>
         </div>
       </div>
@@ -286,69 +286,69 @@ export const Dashboard = () => {
       </div>
 
       {/* Recent Predictions Table */}
-      <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs">
-        <div className="flex items-center justify-between mb-4">
+      <div className="bg-white rounded-2xl p-6 md:p-7 border border-slate-200/90 shadow-xs">
+        <div className="flex items-center justify-between mb-5">
           <div>
-            <h3 className="font-bold text-slate-800 text-sm">Recent Real-Time Predictions</h3>
-            <p className="text-xs text-slate-400">Live predictions stored in MongoDB</p>
+            <h3 className="font-bold text-slate-900 text-base md:text-lg">Recent Real-Time Predictions</h3>
+            <p className="text-sm text-slate-500">Live inference records stored securely in MongoDB</p>
           </div>
           <Link
             to="/history"
-            className="text-xs font-semibold text-blue-600 hover:text-blue-700 flex items-center gap-1"
+            className="text-sm font-bold text-indigo-600 hover:text-indigo-800 flex items-center gap-1.5"
           >
             <span>View Full History</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            <ArrowRight className="w-4 h-4" />
           </Link>
         </div>
 
         {recentPreds.length === 0 ? (
-          <div className="text-center py-8 text-slate-400 text-xs">
-            No predictions generated yet. Navigate to "Predict Churn" to create one.
+          <div className="text-center py-10 text-slate-400 text-sm">
+            No predictions generated yet. Navigate to "Predict Customer Churn" to evaluate customer records.
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs">
-              <thead className="bg-slate-50 text-slate-500 font-semibold uppercase tracking-wider border-b border-slate-200">
+            <table className="w-full text-left text-sm">
+              <thead className="bg-slate-50 text-slate-600 font-bold uppercase tracking-wider text-xs border-b border-slate-200 select-none">
                 <tr>
-                  <th className="py-3 px-4">Customer ID</th>
-                  <th className="py-3 px-4">Model Used</th>
-                  <th className="py-3 px-4">Churn Probability</th>
-                  <th className="py-3 px-4">Prediction</th>
-                  <th className="py-3 px-4">Risk Category</th>
-                  <th className="py-3 px-4">Date</th>
+                  <th className="py-3.5 px-4">Customer ID</th>
+                  <th className="py-3.5 px-4">Model Used</th>
+                  <th className="py-3.5 px-4">Churn Probability</th>
+                  <th className="py-3.5 px-4">Prediction</th>
+                  <th className="py-3.5 px-4">Risk Category</th>
+                  <th className="py-3.5 px-4">Date</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100">
+              <tbody className="divide-y divide-slate-100 font-medium">
                 {recentPreds.map((item) => (
-                  <tr key={item.id} className="hover:bg-slate-50/60 transition-colors">
-                    <td className="py-3 px-4 font-mono font-bold text-slate-800">{item.customer_id}</td>
-                    <td className="py-3 px-4 text-slate-600 truncate max-w-xs">{item.model_name}</td>
-                    <td className="py-3 px-4 font-bold text-slate-900">{item.churn_percentage}%</td>
-                    <td className="py-3 px-4">
+                  <tr key={item.id} className="hover:bg-slate-50/80 transition-colors">
+                    <td className="py-3.5 px-4 font-mono font-bold text-slate-900">{item.customer_id}</td>
+                    <td className="py-3.5 px-4 text-slate-600 truncate max-w-xs">{item.model_name}</td>
+                    <td className="py-3.5 px-4 font-black text-slate-900 text-base">{item.churn_percentage}%</td>
+                    <td className="py-3.5 px-4">
                       <span
-                        className={`px-2.5 py-0.5 rounded-full font-bold text-[11px] ${
+                        className={`px-3 py-1 rounded-full font-bold text-xs ${
                           item.predicted_class === 1
-                            ? 'bg-rose-100 text-rose-700'
-                            : 'bg-emerald-100 text-emerald-700'
+                            ? 'bg-rose-100 text-rose-800'
+                            : 'bg-emerald-100 text-emerald-800'
                         }`}
                       >
                         {item.predicted_label}
                       </span>
                     </td>
-                    <td className="py-3 px-4">
+                    <td className="py-3.5 px-4">
                       <span
-                        className={`px-2.5 py-0.5 rounded-full font-semibold text-[11px] ${
+                        className={`px-3 py-1 rounded-full font-bold text-xs border ${
                           item.risk_level === 'High Risk'
-                            ? 'bg-red-50 text-red-700 border border-red-200'
+                            ? 'bg-red-50 text-red-700 border-red-200'
                             : item.risk_level === 'Medium Risk'
-                            ? 'bg-amber-50 text-amber-700 border border-amber-200'
-                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200'
+                            ? 'bg-amber-50 text-amber-700 border-amber-200'
+                            : 'bg-emerald-50 text-emerald-700 border-emerald-200'
                         }`}
                       >
                         {item.risk_level}
                       </span>
                     </td>
-                    <td className="py-3 px-4 text-slate-400">
+                    <td className="py-3.5 px-4 text-slate-500 text-xs font-semibold">
                       {new Date(item.created_at).toLocaleDateString()}
                     </td>
                   </tr>

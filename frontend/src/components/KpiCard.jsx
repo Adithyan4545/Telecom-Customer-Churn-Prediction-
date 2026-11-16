@@ -11,22 +11,22 @@ export const KpiCard = ({ title, value, subtitle, icon: Icon, color = 'blue', tr
   };
 
   return (
-    <div className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:shadow-md transition-shadow">
+    <div className="bg-white rounded-2xl p-6 border border-slate-200/90 shadow-xs hover:shadow-md transition-all">
       <div className="flex items-center justify-between">
-        <span className="text-xs font-semibold uppercase tracking-wider text-slate-500">{title}</span>
-        <div className={`w-10 h-10 rounded-xl flex items-center justify-center border ${colorStyles[color] || colorStyles.blue}`}>
+        <span className="text-sm font-bold uppercase tracking-wider text-slate-500">{title}</span>
+        <div className={`w-11 h-11 rounded-xl flex items-center justify-center border shadow-xs ${colorStyles[color] || colorStyles.blue}`}>
           {Icon && <Icon className="w-5 h-5" />}
         </div>
       </div>
       <div className="mt-4 flex items-baseline gap-2">
-        <span className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight">{value}</span>
+        <span className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight">{value}</span>
         {trend && (
-          <span className={`text-xs font-semibold px-2 py-0.5 rounded-full ${trend.type === 'positive' ? 'bg-emerald-100 text-emerald-700' : 'bg-rose-100 text-rose-700'}`}>
+          <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${trend.type === 'positive' ? 'bg-emerald-100 text-emerald-800' : 'bg-rose-100 text-rose-800'}`}>
             {trend.text}
           </span>
         )}
       </div>
-      {subtitle && <p className="text-xs text-slate-400 mt-1 font-medium">{subtitle}</p>}
+      {subtitle && <p className="text-sm text-slate-500 mt-1.5 font-medium">{subtitle}</p>}
     </div>
   );
 };

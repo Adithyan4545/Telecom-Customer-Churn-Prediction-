@@ -20,19 +20,19 @@ export const ProbabilityMeter = ({ probability, threshold = 0.48 }) => {
   const thresholdPct = threshold * 100;
 
   return (
-    <div className="w-full bg-slate-50 rounded-2xl p-6 border border-slate-200">
-      <div className="flex items-center justify-between mb-3">
+    <div className="w-full bg-slate-50/80 rounded-2xl p-6 border border-slate-200">
+      <div className="flex items-center justify-between mb-4">
         <div>
-          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider block">Estimated Churn Probability</span>
-          <span className="text-3xl font-extrabold text-slate-900 tracking-tight">{pct.toFixed(1)}%</span>
+          <span className="text-sm font-bold text-slate-500 uppercase tracking-wider block">Estimated Churn Probability</span>
+          <span className="text-4xl font-black text-slate-900 tracking-tight mt-0.5 block">{pct.toFixed(1)}%</span>
         </div>
-        <span className={`px-3 py-1.5 rounded-xl text-xs font-bold border ${badgeColor}`}>
+        <span className={`px-4 py-2 rounded-xl text-sm font-extrabold border shadow-xs ${badgeColor}`}>
           {statusText}
         </span>
       </div>
 
       {/* Progress Bar Container */}
-      <div className="relative w-full h-4 bg-slate-200 rounded-full overflow-hidden shadow-inner my-3">
+      <div className="relative w-full h-5 bg-slate-200 rounded-full overflow-hidden shadow-inner my-4">
         <div
           className={`h-full bg-gradient-to-r ${colorClass} rounded-full transition-all duration-700 ease-out`}
           style={{ width: `${pct}%` }}
@@ -46,12 +46,12 @@ export const ProbabilityMeter = ({ probability, threshold = 0.48 }) => {
       </div>
 
       {/* Labels below meter */}
-      <div className="flex items-center justify-between text-[11px] font-semibold text-slate-400 mt-2">
-        <span className="text-emerald-600">0% (Safe)</span>
-        <span className="text-slate-600 font-bold bg-white px-2 py-0.5 rounded border border-slate-300">
+      <div className="flex items-center justify-between text-xs font-bold text-slate-500 mt-2">
+        <span className="text-emerald-700 font-bold">0% (Low Risk)</span>
+        <span className="text-slate-700 font-extrabold bg-white px-2.5 py-1 rounded-md border border-slate-300 shadow-2xs">
           Threshold ({thresholdPct}%)
         </span>
-        <span className="text-rose-600">100% (Critical)</span>
+        <span className="text-rose-700 font-bold">100% (High Risk)</span>
       </div>
     </div>
   );

@@ -79,58 +79,58 @@ export default function Analytics() {
 
       {/* Business Impact KPIs */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="p-4 rounded-xl bg-gradient-to-br from-indigo-500 to-indigo-600 text-white shadow-xs">
-          <div className="flex items-center justify-between text-indigo-100 text-xs font-medium">
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-indigo-600 to-indigo-700 text-white shadow-xs">
+          <div className="flex items-center justify-between text-indigo-100 text-sm font-semibold">
             <span>Overall Churn Rate</span>
-            <Users className="w-4 h-4 opacity-80" />
+            <Users className="w-5 h-5 opacity-80" />
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold">26.54%</span>
-            <span className="text-xs text-indigo-200 font-medium">1,869 churners</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-3xl font-black">26.54%</span>
+            <span className="text-xs text-indigo-200 font-bold">1,869 churners</span>
           </div>
-          <p className="mt-2 text-[11px] text-indigo-100/90 leading-tight">
-            Industry baseline; indicates ~1 in 4 subscribers leave without retention action.
+          <p className="mt-2 text-xs text-indigo-100/90 leading-relaxed font-medium">
+            Historical baseline; indicates ~1 in 4 subscribers leave without retention action.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-rose-500 to-rose-600 text-white shadow-xs">
-          <div className="flex items-center justify-between text-rose-100 text-xs font-medium">
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-rose-600 to-rose-700 text-white shadow-xs">
+          <div className="flex items-center justify-between text-rose-100 text-sm font-semibold">
             <span>Est. Monthly MRR At Risk</span>
-            <DollarSign className="w-4 h-4 opacity-80" />
+            <DollarSign className="w-5 h-5 opacity-80" />
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold">$139,130</span>
-            <span className="text-xs text-rose-200 font-medium">/ month</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-3xl font-black">$139,130</span>
+            <span className="text-xs text-rose-200 font-bold">/ month</span>
           </div>
-          <p className="mt-2 text-[11px] text-rose-100/90 leading-tight">
+          <p className="mt-2 text-xs text-rose-100/90 leading-relaxed font-medium">
             Average churner spend is $74.44/mo. Early retention captures high-value revenue.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-xs">
-          <div className="flex items-center justify-between text-amber-100 text-xs font-medium">
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-amber-500 to-amber-600 text-white shadow-xs">
+          <div className="flex items-center justify-between text-amber-100 text-sm font-semibold">
             <span>Month-to-Month Churn</span>
-            <AlertCircle className="w-4 h-4 opacity-80" />
+            <AlertCircle className="w-5 h-5 opacity-80" />
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold">42.71%</span>
-            <span className="text-xs text-amber-100 font-medium">High Risk</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-3xl font-black">42.71%</span>
+            <span className="text-xs text-amber-100 font-bold">High Risk</span>
           </div>
-          <p className="mt-2 text-[11px] text-amber-100/90 leading-tight">
+          <p className="mt-2 text-xs text-amber-100/90 leading-relaxed font-medium">
             Subscribers without annual contracts have a 15x higher defection rate than 2-year clients.
           </p>
         </div>
 
-        <div className="p-4 rounded-xl bg-gradient-to-br from-emerald-500 to-emerald-600 text-white shadow-xs">
-          <div className="flex items-center justify-between text-emerald-100 text-xs font-medium">
+        <div className="p-5 rounded-2xl bg-gradient-to-br from-emerald-600 to-emerald-700 text-white shadow-xs">
+          <div className="flex items-center justify-between text-emerald-100 text-sm font-semibold">
             <span>Retained Subscriber Base</span>
-            <ShieldCheck className="w-4 h-4 opacity-80" />
+            <ShieldCheck className="w-5 h-5 opacity-80" />
           </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl font-bold">73.46%</span>
-            <span className="text-xs text-emerald-100 font-medium">5,174 active</span>
+          <div className="mt-3 flex items-baseline gap-2">
+            <span className="text-3xl font-black">73.46%</span>
+            <span className="text-xs text-emerald-100 font-bold">5,174 active</span>
           </div>
-          <p className="mt-2 text-[11px] text-emerald-100/90 leading-tight">
+          <p className="mt-2 text-xs text-emerald-100/90 leading-relaxed font-medium">
             Loyal customer core with sustained subscription lifetime.
           </p>
         </div>

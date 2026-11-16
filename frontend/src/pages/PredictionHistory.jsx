@@ -148,48 +148,48 @@ export default function PredictionHistory() {
   return (
     <div className="space-y-6">
       {/* Header Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-1 border-b border-slate-200">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-2 border-b border-slate-200">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-900 flex items-center gap-2">
-            <History className="w-6 h-6 text-indigo-600" />
+          <h1 className="text-2xl md:text-3xl font-black tracking-tight text-slate-900 flex items-center gap-2.5">
+            <History className="w-7 h-7 text-indigo-600" />
             Prediction History
           </h1>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="text-sm text-slate-500 mt-1 font-medium">
             Audit log of all machine learning inference records saved in MongoDB
           </p>
         </div>
         <div className="flex items-center gap-3">
           <button
             onClick={fetchHistory}
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-slate-700 bg-white border border-slate-200 rounded-lg hover:bg-slate-50 transition-colors shadow-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-2 text-sm font-semibold text-slate-700 bg-white border border-slate-300 rounded-xl hover:bg-slate-50 transition-colors shadow-xs"
             title="Refresh Table"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
+            <RefreshCw className={`w-4 h-4 ${loading ? 'animate-spin text-indigo-600' : ''}`} />
             Refresh
           </button>
           <button
             onClick={handleExportCSV}
             disabled={exporting || total === 0}
-            className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 rounded-lg transition-colors shadow-xs"
+            className="inline-flex items-center gap-2 px-4 py-2 text-sm font-bold text-white bg-indigo-600 hover:bg-indigo-700 disabled:bg-slate-300 rounded-xl transition-colors shadow-xs"
           >
-            <Download className="w-3.5 h-3.5" />
+            <Download className="w-4 h-4" />
             {exporting ? 'Exporting...' : 'Export to CSV'}
           </button>
         </div>
       </div>
 
       {/* Filter and Search Bar */}
-      <div className="bg-white p-4 rounded-xl border border-slate-200/80 shadow-xs space-y-3">
-        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-12 gap-3 items-center">
+      <div className="bg-white p-5 rounded-2xl border border-slate-200/90 shadow-xs space-y-4">
+        <form onSubmit={handleSearchSubmit} className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
           {/* Customer ID Search */}
           <div className="md:col-span-4 relative">
-            <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-4 h-4 text-slate-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search by Customer ID (e.g. 7590-VHVEG)..."
               value={searchCustomerId}
               onChange={(e) => setSearchCustomerId(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 text-xs border border-slate-200 rounded-lg bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
+              className="w-full pl-10 pr-3.5 py-2.5 text-sm font-medium border border-slate-300 rounded-xl bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
             />
           </div>
 
@@ -201,7 +201,7 @@ export default function PredictionHistory() {
                 setSelectedRisk(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-3 text-xs border border-slate-200 rounded-lg bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-700"
+              className="w-full py-2.5 px-3.5 text-sm font-bold border border-slate-300 rounded-xl bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-800"
             >
               <option value="">All Risk Levels</option>
               <option value="High">High Risk</option>
@@ -218,7 +218,7 @@ export default function PredictionHistory() {
                 setSelectedChurn(e.target.value);
                 setPage(1);
               }}
-              className="w-full py-2 px-3 text-xs border border-slate-200 rounded-lg bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all text-slate-700"
+              className="w-full py-2.5 px-3.5 text-sm font-bold border border-slate-300 rounded-xl bg-slate-50/50 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all text-slate-800"
             >
               <option value="">All Outcomes</option>
               <option value="1">Will Churn</option>
@@ -230,7 +230,7 @@ export default function PredictionHistory() {
           <div className="md:col-span-2 flex items-center gap-2">
             <button
               type="submit"
-              className="w-full py-2 px-3 text-xs font-semibold text-white bg-slate-800 hover:bg-slate-900 rounded-lg transition-colors"
+              className="w-full py-2.5 px-4 text-sm font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-xl transition-colors cursor-pointer"
             >
               Apply
             </button>
@@ -238,7 +238,7 @@ export default function PredictionHistory() {
               <button
                 type="button"
                 onClick={handleResetFilters}
-                className="py-2 px-2.5 text-xs text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-lg transition-colors"
+                className="py-2.5 px-3 text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 rounded-xl transition-colors"
                 title="Reset Filters"
               >
                 <X className="w-4 h-4" />
@@ -247,7 +247,7 @@ export default function PredictionHistory() {
           </div>
         </form>
 
-        <div className="flex items-center justify-between text-xs text-slate-500 pt-1 border-t border-slate-100">
+        <div className="flex items-center justify-between text-sm text-slate-500 pt-2 border-t border-slate-100 font-medium">
           <span>Found <strong className="text-slate-800">{total}</strong> total prediction records</span>
           <span>Page {page} of {pages}</span>
         </div>
@@ -281,34 +281,34 @@ export default function PredictionHistory() {
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-left border-collapse">
+            <table className="w-full text-left border-collapse text-sm">
               <thead>
-                <tr className="bg-slate-50/80 border-b border-slate-200 text-[11px] font-semibold text-slate-500 uppercase tracking-wider">
-                  <th className="py-3 px-4">Prediction ID</th>
-                  <th className="py-3 px-4">Customer ID</th>
-                  <th className="py-3 px-4">Date / Time</th>
-                  <th className="py-3 px-4">Model Used</th>
-                  <th className="py-3 px-4 text-center">Probability</th>
-                  <th className="py-3 px-4 text-center">Threshold</th>
-                  <th className="py-3 px-4 text-center">Prediction</th>
-                  <th className="py-3 px-4 text-center">Risk Level</th>
-                  <th className="py-3 px-4 text-right">Actions</th>
+                <tr className="bg-slate-50/90 border-b border-slate-200 text-xs font-bold text-slate-600 uppercase tracking-wider">
+                  <th className="py-3.5 px-4">Prediction ID</th>
+                  <th className="py-3.5 px-4">Customer ID</th>
+                  <th className="py-3.5 px-4">Date / Time</th>
+                  <th className="py-3.5 px-4">Model Used</th>
+                  <th className="py-3.5 px-4 text-center">Probability</th>
+                  <th className="py-3.5 px-4 text-center">Threshold</th>
+                  <th className="py-3.5 px-4 text-center">Prediction</th>
+                  <th className="py-3.5 px-4 text-center">Risk Level</th>
+                  <th className="py-3.5 px-4 text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-100 text-xs">
+              <tbody className="divide-y divide-slate-100 font-medium">
                 {predictions.map((item) => {
                   const itemId = item._id || item.id;
                   const probPct = (item.churn_probability * 100).toFixed(1);
                   const isChurn = item.churn_prediction;
                   return (
-                    <tr key={itemId} className="hover:bg-slate-50/70 transition-colors">
-                      <td className="py-3 px-4 font-mono text-[11px] text-slate-500">
+                    <tr key={itemId} className="hover:bg-slate-50/80 transition-colors">
+                      <td className="py-3.5 px-4 font-mono text-xs text-slate-500 font-semibold">
                         {itemId ? itemId.slice(-6).toUpperCase() : 'N/A'}
                       </td>
-                      <td className="py-3 px-4 font-semibold text-slate-800">
+                      <td className="py-3.5 px-4 font-mono font-bold text-slate-900">
                         {item.customer_id}
                       </td>
-                      <td className="py-3 px-4 text-slate-500 whitespace-nowrap">
+                      <td className="py-3.5 px-4 text-slate-600 text-xs whitespace-nowrap font-medium">
                         {new Date(item.created_at).toLocaleString('en-US', {
                           month: 'short',
                           day: 'numeric',
@@ -316,35 +316,35 @@ export default function PredictionHistory() {
                           minute: '2-digit'
                         })}
                       </td>
-                      <td className="py-3 px-4">
-                        <span className="inline-block px-2 py-0.5 text-[10px] font-medium bg-slate-100 text-slate-700 rounded-md">
+                      <td className="py-3.5 px-4">
+                        <span className="inline-block px-2.5 py-1 text-xs font-bold bg-slate-100 text-slate-800 rounded-md">
                           {item.model_name || 'CatBoost Classifier'}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-center font-bold">
+                      <td className="py-3.5 px-4 text-center font-black text-base">
                         <span className={item.churn_probability >= 0.7 ? 'text-rose-600' : item.churn_probability >= 0.4 ? 'text-amber-600' : 'text-emerald-600'}>
                           {probPct}%
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-center font-mono text-slate-500 text-[11px]">
+                      <td className="py-3.5 px-4 text-center font-mono text-slate-600 text-xs font-bold">
                         {item.threshold.toFixed(2)}
                       </td>
-                      <td className="py-3 px-4 text-center">
-                        <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[11px] font-semibold ${
+                      <td className="py-3.5 px-4 text-center">
+                        <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold ${
                           isChurn 
-                            ? 'bg-rose-50 text-rose-700 border border-rose-200/60' 
-                            : 'bg-emerald-50 text-emerald-700 border border-emerald-200/60'
+                            ? 'bg-rose-100 text-rose-800 border border-rose-200' 
+                            : 'bg-emerald-100 text-emerald-800 border border-emerald-200'
                         }`}>
                           {isChurn ? 'Churn' : 'Retained'}
                         </span>
                       </td>
-                      <td className="py-3 px-4 text-center">
+                      <td className="py-3.5 px-4 text-center">
                         {getRiskBadge(item.risk_level)}
                       </td>
-                      <td className="py-3 px-4 text-right space-x-1 whitespace-nowrap">
+                      <td className="py-3.5 px-4 text-right space-x-1 whitespace-nowrap">
                         <button
                           onClick={() => setSelectedItem(item)}
-                          className="p-1.5 text-slate-500 hover:text-indigo-600 hover:bg-indigo-50 rounded-md transition-colors"
+                          className="p-2 text-slate-600 hover:text-indigo-600 hover:bg-indigo-50 rounded-lg transition-colors cursor-pointer"
                           title="View Details"
                         >
                           <Eye className="w-4 h-4" />

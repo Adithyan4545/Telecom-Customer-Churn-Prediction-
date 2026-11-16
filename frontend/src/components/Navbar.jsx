@@ -14,10 +14,10 @@ export const Navbar = () => {
   const title = titles[location.pathname] || 'Customer Churn Prediction';
 
   return (
-    <header className="h-16 bg-white border-b border-slate-200/80 px-8 flex items-center justify-between sticky top-0 z-20">
+    <header className="h-18 bg-white border-b border-slate-200/90 px-8 flex items-center justify-between sticky top-0 z-20 shadow-xs">
       <div>
-        <h1 className="text-lg font-bold text-slate-800 tracking-tight">{title}</h1>
-        <p className="text-xs text-slate-500">Telecom Customer Retention Intelligence</p>
+        <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{title}</h1>
+        <p className="text-sm text-slate-500 font-medium">Telecom Customer Retention Intelligence & Prediction</p>
       </div>
     </header>
   );
