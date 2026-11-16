@@ -357,7 +357,7 @@ export const PredictChurn = () => {
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Monthly Charges ($)</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Monthly Bill Amount</label>
                 <input
                   type="number"
                   step="0.05"
@@ -367,10 +367,11 @@ export const PredictChurn = () => {
                   onChange={(e) => handleChange('MonthlyCharges', parseFloat(e.target.value) || 0)}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                 />
+                <p className="text-xs text-slate-500 mt-1.5">Enter the customer's actual bill amount.</p>
               </div>
 
               <div>
-                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Total Lifetime Charges ($)</label>
+                <label className="block text-sm font-semibold text-slate-700 mb-1.5">Total Bill Amount</label>
                 <input
                   type="number"
                   step="0.1"
@@ -379,6 +380,7 @@ export const PredictChurn = () => {
                   onChange={(e) => handleChange('TotalCharges', parseFloat(e.target.value) || 0)}
                   className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-sm font-medium text-slate-800 focus:bg-white focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-600 transition-all"
                 />
+                <p className="text-xs text-slate-500 mt-1.5">Enter the customer's actual bill amount.</p>
               </div>
             </div>
           </div>
